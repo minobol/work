@@ -1,0 +1,36 @@
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class ToyStoreGiveaway {
+    private String toyID;
+    private String toyName;
+    private int toyFrequency;
+
+    public ToyStoreGiveaway(String toyID, String toyName, int toyFrequency) {
+        this.toyID = toyID;
+        this.toyName = toyName;
+        this.toyFrequency = toyFrequency;
+    }
+
+    public static void main(String[] args) {
+        ToyStoreGiveaway[] toys = {
+                new ToyStoreGiveaway("1", "Teddy Bear", 3),
+                new ToyStoreGiveaway("2", "Doll", 2),
+                new ToyStoreGiveaway("3", "Action Figure", 1)
+        };
+
+        PriorityQueue<ToyStoreGiveaway> priorityQueue = new PriorityQueue<>(toys.length, (a, b) -> a.toyFrequency - b.toyFrequency);
+
+        for (ToyStoreGiveaway toy : toys) {
+            priorityQueue.add(toy);
+        }
+
+        Queue<ToyStoreGiveaway> queue = new LinkedList<>(priorityQueue);
+
+        for (int i = 0; i < 10; i++) {
+            ToyStoreGiveaway toy = queue.poll();
+            System.out.println(toy.toyName);
+            // Write the result to a file
+        }
+    }
+}
